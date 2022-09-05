@@ -556,48 +556,48 @@ class CreditCardScreenState extends State<CreditCardScreen> {
   }
   void setAddressField(bool isBilling, String field, String value)
   {
-    if(isBilling && widget.checkoutOptions.billing == null)
-      widget.checkoutOptions.billing = new Address();
+    if(isBilling && widget.checkoutOptions.billingAddress == null)
+      widget.checkoutOptions.billingAddress = new Address();
 
-    if(!isBilling && widget.checkoutOptions.shipping == null)
-      widget.checkoutOptions.shipping = new Address();
+    if(!isBilling && widget.checkoutOptions.shippingAddress == null)
+      widget.checkoutOptions.shippingAddress = new Address();
 
     if(field == "countryCode")
     {
-      isBilling ? widget.checkoutOptions.billing!.countryCode = value : widget.checkoutOptions.shipping!.countryCode = value;
+      isBilling ? widget.checkoutOptions.billingAddress!.countryCode = value : widget.checkoutOptions.shippingAddress!.countryCode = value;
     }
     else if(field == "street")
     {
-      isBilling ? widget.checkoutOptions.billing!.street = value : widget.checkoutOptions.shipping!.street = value;
+      isBilling ? widget.checkoutOptions.billingAddress!.street = value : widget.checkoutOptions.shippingAddress!.street = value;
     }
     else if(field == "city")
     {
-      isBilling ? widget.checkoutOptions.billing!.city = value : widget.checkoutOptions.shipping!.city = value;
+      isBilling ? widget.checkoutOptions.billingAddress!.city = value : widget.checkoutOptions.shippingAddress!.city = value;
     }
     else if(field == "postCode")
     {
-      isBilling ? widget.checkoutOptions.billing!.postCode = value : widget.checkoutOptions.shipping!.postCode = value;
+      isBilling ? widget.checkoutOptions.billingAddress!.postCode = value : widget.checkoutOptions.shippingAddress!.postCode = value;
     }
   }
   String getAddressField(bool isBilling, String field)
   {
-    var billing = widget.checkoutOptions.billing != null ? widget.checkoutOptions.billing : new Address();
-    var shipping = widget.checkoutOptions.shipping != null ? widget.checkoutOptions.shipping : new Address();
+    var billingAddress = widget.checkoutOptions.billingAddress != null ? widget.checkoutOptions.billingAddress : new Address();
+    var shippingAddress = widget.checkoutOptions.shippingAddress != null ? widget.checkoutOptions.shippingAddress : new Address();
     if(field == "countryCode")
     {
-      return isBilling ? billing!.countryCode!: shipping!.countryCode!;
+      return isBilling ? billingAddress!.countryCode!: shippingAddress!.countryCode!;
     }
     else if(field == "street")
       {
-        return isBilling ? billing!.street!: shipping!.street!;
+        return isBilling ? billingAddress!.street!: shippingAddress!.street!;
       }
     else if(field == "city")
     {
-      return isBilling ? billing!.city!: shipping!.city!;
+      return isBilling ? billingAddress!.city!: shippingAddress!.city!;
     }
     else if(field == "postCode")
     {
-      return isBilling ? billing!.postCode!: shipping!.postCode!;
+      return isBilling ? billingAddress!.postCode!: shippingAddress!.postCode!;
     }
     else
       {
