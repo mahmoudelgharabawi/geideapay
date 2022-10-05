@@ -18,8 +18,8 @@ class CheckoutOptions {
   final String? merchantReferenceID;
   bool? cardOnFile, showBilling, showShipping, showSaveCard;
   String? paymentOperation;
-  Address? billing;
-  Address? shipping;
+  Address? billingAddress;
+  Address? shippingAddress;
   final String? customerEmail;
   final String? paymentIntentId;
   String? lang;
@@ -35,8 +35,8 @@ class CheckoutOptions {
         this.cardOnFile,
         this.merchantReferenceID,
         this.paymentOperation,
-        this.billing,
-        this.shipping,
+        this.billingAddress,
+        this.shippingAddress,
         this.customerEmail,
         this.paymentIntentId,
         this.backgroundColor,
