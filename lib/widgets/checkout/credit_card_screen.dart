@@ -16,6 +16,7 @@ import '../../common/credit_card_type_detector.dart';
 import '../../models/address.dart';
 
 const Map<CreditCardType, String?> CreditCardTypeIconAsset = <CreditCardType, String?>{
+  CreditCardType.mada: 'icons/mada.png',
   CreditCardType.visa: 'icons/visa.png',
   CreditCardType.amex: 'icons/amex.png',
   CreditCardType.mastercard: 'icons/mastercard.png',
@@ -631,7 +632,7 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                         rtl: true,
                         formKey: formKey,
                         obscureCvv: true,
-                        obscureNumber: true,
+                        obscureNumber: false,
                         cardNumber: widget.paymentCard.number,
                         cvvCode: widget.paymentCard.cvc,
                         isHolderNameVisible: true,
