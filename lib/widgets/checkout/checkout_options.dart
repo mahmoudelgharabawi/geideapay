@@ -63,5 +63,9 @@ class CheckoutOptions {
     showBilling ??= false;
     showShipping ??= false;
     showSaveCard ??= false;
+    if(this.billingAddress != null && (this.billingAddress!).isempty())
+      this.billingAddress = null;
+    if(this.shippingAddress != null && (this.shippingAddress!).isempty())
+      this.shippingAddress = null;
   }
 }
