@@ -214,7 +214,7 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                                 if (formKey.currentState!.validate()) {
                                   print('valid!');
                                   setState(() => _checkoutInProgress = true);
-                                  //Navigator.pop(context, 'OK');
+                                  Navigator.pop(context, 'OK');
                                 } else {
                                   print('invalid!');
                                 }
@@ -801,7 +801,7 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                                     if (formKey.currentState!.validate()) {
                                       print('valid!');
                                       setState(() => _checkoutInProgress = true);
-                                      //Navigator.pop(context, 'OK');
+                                      Navigator.pop(context, 'OK');
                                     } else {
                                       print('invalid!');
                                     }
