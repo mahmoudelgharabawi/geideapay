@@ -216,11 +216,12 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                                       if (formKey.currentState!.validate()) {
                                         print('valid!');
                                         setState(() => _checkoutInProgress = true);
-                                        Future.delayed(
-                                          const Duration(seconds: 5),
-                                              () => setState(() => _checkoutInProgress = false),
-                                        );
-                                        Navigator.pop(context, 'OK');
+                                        Future.delayed(const Duration(seconds: 8), () {
+                                          setState(() {
+                                            _checkoutInProgress = false;
+                                          });
+                                          Navigator.pop(context, 'OK');
+                                        });
                                       } else {
                                         print('invalid!');
                                       }
@@ -815,11 +816,12 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                                       if (formKey.currentState!.validate()) {
                                         print('valid!');
                                         setState(() => _checkoutInProgress = true);
-                                        Future.delayed(
-                                          const Duration(seconds: 5),
-                                              () => setState(() => _checkoutInProgress = false),
-                                        );
-                                        Navigator.pop(context, 'OK');
+                                        Future.delayed(const Duration(seconds: 8), () {
+                                          setState(() {
+                                            _checkoutInProgress = false;
+                                          });
+                                          Navigator.pop(context, 'OK');
+                                        });
                                       } else {
                                         print('invalid!');
                                       }
@@ -902,6 +904,7 @@ class CreditCardScreenState extends State<CreditCardScreen> {
       widget.paymentCard.name = creditCardModel.cardHolderName;
       widget.paymentCard.cvc = creditCardModel.cvvCode;
       isCvvFocused = creditCardModel.isCvvFocused;
+      _checkoutInProgress = false;
     });
   }
 }
