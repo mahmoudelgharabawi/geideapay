@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,14 +7,15 @@ import 'package:geideapay/geideapay.dart';
 import 'package:geideapay/widgets/checkout/checkout_options.dart';
 
 import 'package:geideapay/widgets/checkout/flutter_credit_card.dart';
-import 'package:geideapay/widgets/checkout/credit_card_brand.dart';
 import 'package:geideapay/widgets/checkout/credit_card_form.dart';
 import 'package:geideapay/widgets/checkout/credit_card_model.dart';
-import 'package:geideapay/widgets/checkout/credit_card_widget.dart' as credit_card_widget;
+import 'package:geideapay/widgets/checkout/credit_card_widget.dart'
+    as credit_card_widget;
 import '../../common/credit_card_type_detector.dart';
 import '../../models/address.dart';
 
-const Map<CreditCardType, String?> CreditCardTypeIconAsset = <CreditCardType, String?>{
+const Map<CreditCardType, String?> CreditCardTypeIconAsset =
+    <CreditCardType, String?>{
   CreditCardType.mada: 'icons/mada.png',
   CreditCardType.visa: 'icons/visa.png',
   CreditCardType.amex: 'icons/amex.png',
@@ -25,7 +25,6 @@ const Map<CreditCardType, String?> CreditCardTypeIconAsset = <CreditCardType, St
 };
 
 class CreditCardScreen extends StatefulWidget {
-
   late PaymentCard paymentCard = PaymentCard.empty();
   late bool saveCard = false;
   CheckoutOptions checkoutOptions;
@@ -38,7 +37,6 @@ class CreditCardScreen extends StatefulWidget {
 }
 
 class CreditCardScreenState extends State<CreditCardScreen> {
-
   bool isCvvFocused = false;
   bool useBackgroundImage = false;
   OutlineInputBorder? border;
@@ -60,21 +58,17 @@ class CreditCardScreenState extends State<CreditCardScreen> {
 
   @override
   Widget build(BuildContext context) {
-    if(widget.checkoutOptions.lang == "EN")
-    {
+    if (widget.checkoutOptions.lang == "EN") {
       return buildCreditCardScreen_EN(context);
-    }
-    else
-    {
+    } else {
       return buildCreditCardScreen_AR(context);
     }
   }
 
-  Widget buildCreditCardScreen_EN(BuildContext context)
-  {
+  Widget buildCreditCardScreen_EN(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Stack (
+        body: Stack(
           children: [
             Container(
               color: widget.checkoutOptions.backgroundColor,
@@ -90,12 +84,14 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Padding(
-                                padding: const EdgeInsets.only(left: 16, top: 10),
-                                child:
-                                Text("Payment", style: TextStyle(
-                                    fontSize: 16.0, fontWeight: FontWeight.bold,
-                                    color: widget.checkoutOptions.textColor))
-                            ),
+                                padding:
+                                    const EdgeInsets.only(left: 16, top: 10),
+                                child: Text("Payment",
+                                    style: TextStyle(
+                                        fontSize: 16.0,
+                                        fontWeight: FontWeight.bold,
+                                        color:
+                                            widget.checkoutOptions.textColor))),
                             CreditCardForm(
                               formKey: formKey,
                               obscureCvv: true,
@@ -114,42 +110,54 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                               cardNumberDecoration: InputDecoration(
                                 labelText: 'Number',
                                 hintText: 'XXXX XXXX XXXX XXXX',
-                                hintStyle: TextStyle(color: widget.checkoutOptions.textColor),
-                                labelStyle: TextStyle(color: widget.checkoutOptions.textColor),
+                                hintStyle: TextStyle(
+                                    color: widget.checkoutOptions.textColor),
+                                labelStyle: TextStyle(
+                                    color: widget.checkoutOptions.textColor),
                                 focusedBorder: border,
                                 enabledBorder: border,
                                 suffixIcon: (cardType != null &&
-                                    CreditCardTypeIconAsset[cardType] != null) ?
-                                Container(
-                                    margin: const EdgeInsets.all(12),
-                                    child:
-                                    Image.asset(
-                                      CreditCardTypeIconAsset[cardType]!,
-                                      height: 32,
-                                      width: 32,
-                                      package: 'geideapay',
-                                    )):
-                                Icon(Icons.call_to_action_rounded, color: widget.checkoutOptions.backgroundColor,),
+                                        CreditCardTypeIconAsset[cardType] !=
+                                            null)
+                                    ? Container(
+                                        margin: const EdgeInsets.all(12),
+                                        child: Image.asset(
+                                          CreditCardTypeIconAsset[cardType]!,
+                                          height: 32,
+                                          width: 32,
+                                          package: 'geideapay',
+                                        ))
+                                    : Icon(
+                                        Icons.call_to_action_rounded,
+                                        color: widget
+                                            .checkoutOptions.backgroundColor,
+                                      ),
                               ),
                               expiryDateDecoration: InputDecoration(
-                                hintStyle: TextStyle(color: widget.checkoutOptions.textColor),
-                                labelStyle: TextStyle(color: widget.checkoutOptions.textColor),
+                                hintStyle: TextStyle(
+                                    color: widget.checkoutOptions.textColor),
+                                labelStyle: TextStyle(
+                                    color: widget.checkoutOptions.textColor),
                                 focusedBorder: border,
                                 enabledBorder: border,
                                 labelText: 'Expired Date',
                                 hintText: 'XX/XX',
                               ),
                               cvvCodeDecoration: InputDecoration(
-                                hintStyle: TextStyle(color: widget.checkoutOptions.textColor),
-                                labelStyle: TextStyle(color: widget.checkoutOptions.textColor),
+                                hintStyle: TextStyle(
+                                    color: widget.checkoutOptions.textColor),
+                                labelStyle: TextStyle(
+                                    color: widget.checkoutOptions.textColor),
                                 focusedBorder: border,
                                 enabledBorder: border,
                                 labelText: 'CVV',
                                 hintText: 'XXX',
                               ),
                               cardHolderDecoration: InputDecoration(
-                                hintStyle: TextStyle(color: widget.checkoutOptions.textColor),
-                                labelStyle: TextStyle(color: widget.checkoutOptions.textColor),
+                                hintStyle: TextStyle(
+                                    color: widget.checkoutOptions.textColor),
+                                labelStyle: TextStyle(
+                                    color: widget.checkoutOptions.textColor),
                                 focusedBorder: border,
                                 enabledBorder: border,
                                 labelText: 'Card Holder',
@@ -159,35 +167,41 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                             const SizedBox(
                               height: 10,
                             ),
-                            (widget.checkoutOptions.showSaveCard != null && widget.checkoutOptions.showSaveCard!)
-                                ?                       Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                const Text(
-                                  'Save card?',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                                Switch(
-                                  value: widget.saveCard,
-                                  inactiveTrackColor: Colors.grey,
-                                  activeColor: Colors.white,
-                                  activeTrackColor: Colors.green,
-                                  onChanged: (bool value) => setState(() {
-                                    widget.saveCard = value;
-                                  }),
-                                ),
-                              ],
-                            ) : Container(),
+                            (widget.checkoutOptions.showSaveCard != null &&
+                                    widget.checkoutOptions.showSaveCard!)
+                                ? Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      const Text(
+                                        'Save card?',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                      Switch(
+                                        value: widget.saveCard,
+                                        inactiveTrackColor: Colors.grey,
+                                        activeColor: Colors.white,
+                                        activeTrackColor: Colors.green,
+                                        onChanged: (bool value) => setState(() {
+                                          widget.saveCard = value;
+                                        }),
+                                      ),
+                                    ],
+                                  )
+                                : Container(),
                             const SizedBox(
                               height: 10,
                             ),
-                            (widget.checkoutOptions.showBilling != null && widget.checkoutOptions.showBilling!)
-                                ? addressForm_EN(true) : Container(),
-                            (widget.checkoutOptions.showShipping != null && widget.checkoutOptions.showShipping!)
-                                ? addressForm_EN(false) : Container(),
+                            (widget.checkoutOptions.showBilling != null &&
+                                    widget.checkoutOptions.showBilling!)
+                                ? addressForm_EN(true)
+                                : Container(),
+                            (widget.checkoutOptions.showShipping != null &&
+                                    widget.checkoutOptions.showShipping!)
+                                ? addressForm_EN(false)
+                                : Container(),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -196,16 +210,23 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8.0),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
                                       ),
-                                      primary: widget.checkoutOptions.payButtonColor,
+                                      foregroundColor:
+                                          widget.checkoutOptions.payButtonColor,
                                     ),
                                     child: Container(
                                       margin: const EdgeInsets.all(12),
                                       child: Text(
-                                        'Pay ' + widget.checkoutOptions.amount
-                                            + ' '
-                                            + (widget.checkoutOptions.currency != null ? widget.checkoutOptions.currency!: ''),
+                                        'Pay ' +
+                                            widget.checkoutOptions.amount +
+                                            ' ' +
+                                            (widget.checkoutOptions.currency !=
+                                                    null
+                                                ? widget
+                                                    .checkoutOptions.currency!
+                                                : ''),
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 14,
@@ -215,8 +236,10 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                                     onPressed: () {
                                       if (formKey.currentState!.validate()) {
                                         print('valid!');
-                                        setState(() => _checkoutInProgress = true);
-                                        Future.delayed(const Duration(seconds: 8), () {
+                                        setState(
+                                            () => _checkoutInProgress = true);
+                                        Future.delayed(
+                                            const Duration(seconds: 8), () {
                                           setState(() {
                                             _checkoutInProgress = false;
                                           });
@@ -233,9 +256,11 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8.0),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
                                       ),
-                                      primary: widget.checkoutOptions.cancelButtonColor,
+                                      foregroundColor: widget
+                                          .checkoutOptions.cancelButtonColor,
                                     ),
                                     child: Container(
                                       margin: const EdgeInsets.all(12),
@@ -261,7 +286,8 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image(
-                                    image: AssetImage('assets/logo.png', package: 'geideapay'),
+                                    image: AssetImage('assets/logo.png',
+                                        package: 'geideapay'),
                                     width: 30,
                                     fit: BoxFit.fill),
                                 Text(
@@ -284,31 +310,31 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                 ),
               ),
             ),
-            _checkoutInProgress ? Container(
-              color: Colors.black.withOpacity(0.5),
-              child: const Center(
-                child: CircularProgressIndicator(),
-              ),
-            ) : Container()
+            _checkoutInProgress
+                ? Container(
+                    color: Colors.black.withOpacity(0.5),
+                    child: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
+                : Container()
           ],
-        )
-    );
+        ));
   }
 
   addressForm_EN(bool isBilling) {
     return Padding(
         padding: const EdgeInsets.all(16),
-        child:
-        Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
                 padding: const EdgeInsets.only(top: 10, bottom: 20),
-                child:
-                Text(isBilling? "Billing address": "Shipping address", style: TextStyle(
-                    fontSize: 16.0, fontWeight: FontWeight.bold,
-                    color: widget.checkoutOptions.textColor))
-            ),
+                child: Text(isBilling ? "Billing address" : "Shipping address",
+                    style: TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                        color: widget.checkoutOptions.textColor))),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 10),
               child: TextFormField(
@@ -321,16 +347,17 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                   focusedBorder: border,
                   enabledBorder: border,
                   hintStyle: TextStyle(color: widget.checkoutOptions.textColor),
-                  labelStyle: TextStyle(
-                      color: widget.checkoutOptions.textColor),
+                  labelStyle:
+                      TextStyle(color: widget.checkoutOptions.textColor),
                   contentPadding:
-                  EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
                 ),
                 initialValue: getAddressField(isBilling, "countryCode"),
-                onChanged: (String? value) => setAddressField(isBilling, "countryCode", value!),
+                onChanged: (String? value) =>
+                    setAddressField(isBilling, "countryCode", value!),
               ),
             ),
             Padding(
@@ -345,16 +372,17 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                   focusedBorder: border,
                   enabledBorder: border,
                   hintStyle: TextStyle(color: widget.checkoutOptions.textColor),
-                  labelStyle: TextStyle(
-                      color: widget.checkoutOptions.textColor),
+                  labelStyle:
+                      TextStyle(color: widget.checkoutOptions.textColor),
                   contentPadding:
-                  EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(5.0)),
                   ),
                 ),
                 initialValue: getAddressField(isBilling, "street"),
-                onChanged: (String? value) => setAddressField(isBilling, "street", value!),
+                onChanged: (String? value) =>
+                    setAddressField(isBilling, "street", value!),
               ),
             ),
             Padding(
@@ -372,18 +400,19 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                         labelText: 'City',
                         focusedBorder: border,
                         enabledBorder: border,
-                        hintStyle: TextStyle(
-                            color: widget.checkoutOptions.textColor),
-                        labelStyle: TextStyle(
-                            color: widget.checkoutOptions.textColor),
-                        contentPadding:
-                        EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                        hintStyle:
+                            TextStyle(color: widget.checkoutOptions.textColor),
+                        labelStyle:
+                            TextStyle(color: widget.checkoutOptions.textColor),
+                        contentPadding: EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 10.0),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(5.0)),
                         ),
                       ),
                       initialValue: getAddressField(isBilling, "city"),
-                      onChanged: (String? value) => setAddressField(isBilling, "city", value!),
+                      onChanged: (String? value) =>
+                          setAddressField(isBilling, "city", value!),
                     ),
                   ),
                   const SizedBox(
@@ -392,8 +421,7 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                   Expanded(
                       flex: 4,
                       child: Container(
-                        margin: const EdgeInsets.only(
-                            left: 16),
+                        margin: const EdgeInsets.only(left: 16),
                         child: TextFormField(
                           style: TextStyle(
                             color: widget.checkoutOptions.textColor,
@@ -407,42 +435,40 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                                 color: widget.checkoutOptions.textColor),
                             labelStyle: TextStyle(
                                 color: widget.checkoutOptions.textColor),
-                            contentPadding:
-                            EdgeInsets.symmetric(
+                            contentPadding: EdgeInsets.symmetric(
                                 vertical: 10.0, horizontal: 10.0),
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(
-                                  5.0)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5.0)),
                             ),
                           ),
                           initialValue: getAddressField(isBilling, "postCode"),
-                          onChanged: (String? value) => setAddressField(isBilling, "postCode", value!),
+                          onChanged: (String? value) =>
+                              setAddressField(isBilling, "postCode", value!),
                         ),
-                      )
-                  ),
+                      )),
                 ],
               ),
             )
           ],
         ));
   }
+
   addressForm_AR(bool isBilling) {
     return Directionality(
         textDirection: TextDirection.rtl,
         child: Padding(
             padding: const EdgeInsets.all(16),
-            child:
-            Column(
+            child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
                     padding: const EdgeInsets.only(top: 10, bottom: 20),
-                    child:
-                    Text(isBilling ? "عنوان الدفع" : "عنوان الشحن",
+                    child: Text(isBilling ? "عنوان الدفع" : "عنوان الشحن",
                         style: TextStyle(
-                            fontSize: 16.0, fontWeight: FontWeight.bold,
-                            color: widget.checkoutOptions.textColor))
-                ),
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                            color: widget.checkoutOptions.textColor))),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: TextFormField(
@@ -454,12 +480,12 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                       labelText: 'الدوله',
                       focusedBorder: border,
                       enabledBorder: border,
-                      hintStyle: TextStyle(
-                          color: widget.checkoutOptions.textColor),
-                      labelStyle: TextStyle(
-                          color: widget.checkoutOptions.textColor),
-                      contentPadding:
-                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                      hintStyle:
+                          TextStyle(color: widget.checkoutOptions.textColor),
+                      labelStyle:
+                          TextStyle(color: widget.checkoutOptions.textColor),
+                      contentPadding: EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 10.0),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
                       ),
@@ -480,12 +506,12 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                       labelText: 'الشارع و رقم المنزل',
                       focusedBorder: border,
                       enabledBorder: border,
-                      hintStyle: TextStyle(
-                          color: widget.checkoutOptions.textColor),
-                      labelStyle: TextStyle(
-                          color: widget.checkoutOptions.textColor),
-                      contentPadding:
-                      EdgeInsets.symmetric(vertical: 10.0, horizontal: 10.0),
+                      hintStyle:
+                          TextStyle(color: widget.checkoutOptions.textColor),
+                      labelStyle:
+                          TextStyle(color: widget.checkoutOptions.textColor),
+                      contentPadding: EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 10.0),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(5.0)),
                       ),
@@ -514,12 +540,11 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                                 color: widget.checkoutOptions.textColor),
                             labelStyle: TextStyle(
                                 color: widget.checkoutOptions.textColor),
-                            contentPadding:
-                            EdgeInsets.symmetric(
+                            contentPadding: EdgeInsets.symmetric(
                                 vertical: 10.0, horizontal: 10.0),
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(
-                                  5.0)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5.0)),
                             ),
                           ),
                           initialValue: getAddressField(isBilling, "city"),
@@ -533,8 +558,7 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                       Expanded(
                           flex: 4,
                           child: Container(
-                            margin: const EdgeInsets.only(
-                                right: 16),
+                            margin: const EdgeInsets.only(right: 16),
                             child: TextFormField(
                               style: TextStyle(
                                 color: widget.checkoutOptions.textColor,
@@ -548,132 +572,122 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                                     color: widget.checkoutOptions.textColor),
                                 labelStyle: TextStyle(
                                     color: widget.checkoutOptions.textColor),
-                                contentPadding:
-                                EdgeInsets.symmetric(
+                                contentPadding: EdgeInsets.symmetric(
                                     vertical: 10.0, horizontal: 10.0),
                                 border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.all(
-                                      Radius.circular(
-                                          5.0)),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5.0)),
                                 ),
                               ),
-                              initialValue: getAddressField(
-                                  isBilling, "postCode"),
-                              onChanged: (String? value) =>
-                                  setAddressField(
-                                      isBilling, "postCode", value!),
+                              initialValue:
+                                  getAddressField(isBilling, "postCode"),
+                              onChanged: (String? value) => setAddressField(
+                                  isBilling, "postCode", value!),
                             ),
-                          )
-                      ),
+                          )),
                     ],
                   ),
                 )
               ],
-            ))
-    );
+            )));
   }
-  void setAddressField(bool isBilling, String field, String value)
-  {
-    if(isBilling && widget.checkoutOptions.billingAddress == null)
+
+  void setAddressField(bool isBilling, String field, String value) {
+    if (isBilling && widget.checkoutOptions.billingAddress == null)
       widget.checkoutOptions.billingAddress = new Address();
 
-    if(!isBilling && widget.checkoutOptions.shippingAddress == null)
+    if (!isBilling && widget.checkoutOptions.shippingAddress == null)
       widget.checkoutOptions.shippingAddress = new Address();
 
-    if(field == "countryCode")
-    {
-      isBilling ? widget.checkoutOptions.billingAddress!.countryCode = value : widget.checkoutOptions.shippingAddress!.countryCode = value;
-    }
-    else if(field == "street")
-    {
-      isBilling ? widget.checkoutOptions.billingAddress!.street = value : widget.checkoutOptions.shippingAddress!.street = value;
-    }
-    else if(field == "city")
-    {
-      isBilling ? widget.checkoutOptions.billingAddress!.city = value : widget.checkoutOptions.shippingAddress!.city = value;
-    }
-    else if(field == "postCode")
-    {
-      isBilling ? widget.checkoutOptions.billingAddress!.postCode = value : widget.checkoutOptions.shippingAddress!.postCode = value;
+    if (field == "countryCode") {
+      isBilling
+          ? widget.checkoutOptions.billingAddress!.countryCode = value
+          : widget.checkoutOptions.shippingAddress!.countryCode = value;
+    } else if (field == "street") {
+      isBilling
+          ? widget.checkoutOptions.billingAddress!.street = value
+          : widget.checkoutOptions.shippingAddress!.street = value;
+    } else if (field == "city") {
+      isBilling
+          ? widget.checkoutOptions.billingAddress!.city = value
+          : widget.checkoutOptions.shippingAddress!.city = value;
+    } else if (field == "postCode") {
+      isBilling
+          ? widget.checkoutOptions.billingAddress!.postCode = value
+          : widget.checkoutOptions.shippingAddress!.postCode = value;
     }
   }
-  String? getAddressField(bool isBilling, String field)
-  {
-    var billingAddress = widget.checkoutOptions.billingAddress != null ? widget.checkoutOptions.billingAddress : new Address();
-    var shippingAddress = widget.checkoutOptions.shippingAddress != null ? widget.checkoutOptions.shippingAddress : new Address();
-    if(field == "countryCode")
-    {
-      if(isBilling){
-        if(billingAddress != null)
+
+  String? getAddressField(bool isBilling, String field) {
+    var billingAddress = widget.checkoutOptions.billingAddress != null
+        ? widget.checkoutOptions.billingAddress
+        : new Address();
+    var shippingAddress = widget.checkoutOptions.shippingAddress != null
+        ? widget.checkoutOptions.shippingAddress
+        : new Address();
+    if (field == "countryCode") {
+      if (isBilling) {
+        if (billingAddress != null)
           return billingAddress!.countryCode;
         else
           return "";
       } else {
-        if(shippingAddress != null)
+        if (shippingAddress != null)
           return shippingAddress!.countryCode;
         else
           return "";
       }
-    }
-    else if(field == "street")
-    {
-      if(isBilling){
-        if(billingAddress != null)
+    } else if (field == "street") {
+      if (isBilling) {
+        if (billingAddress != null)
           return billingAddress!.street;
         else
           return "";
       } else {
-        if(shippingAddress != null)
+        if (shippingAddress != null)
           return shippingAddress!.street;
         else
           return "";
       }
-    }
-    else if(field == "city")
-    {
-      if(isBilling){
-        if(billingAddress != null)
+    } else if (field == "city") {
+      if (isBilling) {
+        if (billingAddress != null)
           return billingAddress!.city;
         else
           return "";
       } else {
-        if(shippingAddress != null)
+        if (shippingAddress != null)
           return shippingAddress!.city;
         else
           return "";
       }
-    }
-    else if(field == "postCode")
-    {
-      if(isBilling){
-        if(billingAddress != null)
+    } else if (field == "postCode") {
+      if (isBilling) {
+        if (billingAddress != null)
           return billingAddress!.postCode;
         else
           return "";
       } else {
-        if(shippingAddress != null)
+        if (shippingAddress != null)
           return shippingAddress!.postCode;
         else
           return "";
       }
-    }
-    else
-    {
+    } else {
       return "";
     }
   }
-  void cardNumberChange(val)
-  {
+
+  void cardNumberChange(val) {
     setState(() {
       cardType = detectCCType(val);
     });
   }
 
-  Widget buildCreditCardScreen_AR(BuildContext context)
-  {
+  Widget buildCreditCardScreen_AR(BuildContext context) {
     return Scaffold(
         resizeToAvoidBottomInset: false,
-        body: Stack (
+        body: Stack(
           children: [
             Container(
               color: widget.checkoutOptions.backgroundColor,
@@ -706,42 +720,54 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                               cardNumberDecoration: InputDecoration(
                                 labelText: 'رقم الكارت',
                                 hintText: 'XXXX XXXX XXXX XXXX',
-                                hintStyle: TextStyle(color: widget.checkoutOptions.textColor),
-                                labelStyle: TextStyle(color: widget.checkoutOptions.textColor),
+                                hintStyle: TextStyle(
+                                    color: widget.checkoutOptions.textColor),
+                                labelStyle: TextStyle(
+                                    color: widget.checkoutOptions.textColor),
                                 focusedBorder: border,
                                 enabledBorder: border,
                                 suffixIcon: (cardType != null &&
-                                    CreditCardTypeIconAsset[cardType] != null) ?
-                                Container(
-                                    margin: const EdgeInsets.all(12),
-                                    child:
-                                    Image.asset(
-                                      CreditCardTypeIconAsset[cardType]!,
-                                      height: 32,
-                                      width: 32,
-                                      package: 'geideapay',
-                                    )):
-                                Icon(Icons.call_to_action_rounded, color: widget.checkoutOptions.backgroundColor,),
+                                        CreditCardTypeIconAsset[cardType] !=
+                                            null)
+                                    ? Container(
+                                        margin: const EdgeInsets.all(12),
+                                        child: Image.asset(
+                                          CreditCardTypeIconAsset[cardType]!,
+                                          height: 32,
+                                          width: 32,
+                                          package: 'geideapay',
+                                        ))
+                                    : Icon(
+                                        Icons.call_to_action_rounded,
+                                        color: widget
+                                            .checkoutOptions.backgroundColor,
+                                      ),
                               ),
                               expiryDateDecoration: InputDecoration(
-                                hintStyle: TextStyle(color: widget.checkoutOptions.textColor),
-                                labelStyle: TextStyle(color: widget.checkoutOptions.textColor),
+                                hintStyle: TextStyle(
+                                    color: widget.checkoutOptions.textColor),
+                                labelStyle: TextStyle(
+                                    color: widget.checkoutOptions.textColor),
                                 focusedBorder: border,
                                 enabledBorder: border,
                                 labelText: 'تاريخ الانتهاء',
                                 hintText: 'XX/XX',
                               ),
                               cvvCodeDecoration: InputDecoration(
-                                hintStyle: TextStyle(color: widget.checkoutOptions.textColor),
-                                labelStyle: TextStyle(color: widget.checkoutOptions.textColor),
+                                hintStyle: TextStyle(
+                                    color: widget.checkoutOptions.textColor),
+                                labelStyle: TextStyle(
+                                    color: widget.checkoutOptions.textColor),
                                 focusedBorder: border,
                                 enabledBorder: border,
                                 labelText: 'الرقم المرجعى',
                                 hintText: 'XXX',
                               ),
                               cardHolderDecoration: InputDecoration(
-                                hintStyle: TextStyle(color: widget.checkoutOptions.textColor),
-                                labelStyle: TextStyle(color: widget.checkoutOptions.textColor),
+                                hintStyle: TextStyle(
+                                    color: widget.checkoutOptions.textColor),
+                                labelStyle: TextStyle(
+                                    color: widget.checkoutOptions.textColor),
                                 focusedBorder: border,
                                 enabledBorder: border,
                                 labelText: 'اسم صاحب الكارت',
@@ -751,32 +777,38 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                             const SizedBox(
                               height: 10,
                             ),
-                            (widget.checkoutOptions.showBilling != null && widget.checkoutOptions.showBilling!)
-                                ? addressForm_AR(true) : Container(),
-                            (widget.checkoutOptions.showShipping != null && widget.checkoutOptions.showShipping!)
-                                ? addressForm_AR(false) : Container(),
-                            (widget.checkoutOptions.showSaveCard != null && widget.checkoutOptions.showSaveCard!)
+                            (widget.checkoutOptions.showBilling != null &&
+                                    widget.checkoutOptions.showBilling!)
+                                ? addressForm_AR(true)
+                                : Container(),
+                            (widget.checkoutOptions.showShipping != null &&
+                                    widget.checkoutOptions.showShipping!)
+                                ? addressForm_AR(false)
+                                : Container(),
+                            (widget.checkoutOptions.showSaveCard != null &&
+                                    widget.checkoutOptions.showSaveCard!)
                                 ? Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Switch(
-                                  value: widget.saveCard,
-                                  inactiveTrackColor: Colors.grey,
-                                  activeColor: Colors.white,
-                                  activeTrackColor: Colors.green,
-                                  onChanged: (bool value) => setState(() {
-                                    widget.saveCard = value;
-                                  }),
-                                ),
-                                const Text(
-                                  'حفظ الكارت؟',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 18,
-                                  ),
-                                ),
-                              ],
-                            ) : Container(),
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                      Switch(
+                                        value: widget.saveCard,
+                                        inactiveTrackColor: Colors.grey,
+                                        activeColor: Colors.white,
+                                        activeTrackColor: Colors.green,
+                                        onChanged: (bool value) => setState(() {
+                                          widget.saveCard = value;
+                                        }),
+                                      ),
+                                      const Text(
+                                        'حفظ الكارت؟',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ],
+                                  )
+                                : Container(),
                             const SizedBox(
                               height: 10,
                             ),
@@ -788,9 +820,11 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8.0),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
                                       ),
-                                      primary: widget.checkoutOptions.payButtonColor,
+                                      foregroundColor:
+                                          widget.checkoutOptions.payButtonColor,
                                     ),
                                     child: Container(
                                       margin: const EdgeInsets.all(12),
@@ -804,8 +838,13 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                                       //   ),
                                       // ),
                                       child: Text(
-                                        (widget.checkoutOptions.currency != null ? widget.checkoutOptions.currency!: '') + 'ادفع ' + widget.checkoutOptions.amount
-                                            + ' ',
+                                        (widget.checkoutOptions.currency != null
+                                                ? widget
+                                                    .checkoutOptions.currency!
+                                                : '') +
+                                            'ادفع ' +
+                                            widget.checkoutOptions.amount +
+                                            ' ',
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 14,
@@ -815,8 +854,10 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                                     onPressed: () {
                                       if (formKey.currentState!.validate()) {
                                         print('valid!');
-                                        setState(() => _checkoutInProgress = true);
-                                        Future.delayed(const Duration(seconds: 8), () {
+                                        setState(
+                                            () => _checkoutInProgress = true);
+                                        Future.delayed(
+                                            const Duration(seconds: 8), () {
                                           setState(() {
                                             _checkoutInProgress = false;
                                           });
@@ -833,9 +874,11 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                                   child: ElevatedButton(
                                     style: ElevatedButton.styleFrom(
                                       shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8.0),
+                                        borderRadius:
+                                            BorderRadius.circular(8.0),
                                       ),
-                                      primary: widget.checkoutOptions.cancelButtonColor,
+                                      foregroundColor: widget
+                                          .checkoutOptions.cancelButtonColor,
                                     ),
                                     child: Container(
                                       margin: const EdgeInsets.all(12),
@@ -861,7 +904,8 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image(
-                                    image: AssetImage('assets/logo.png', package: 'geideapay'),
+                                    image: AssetImage('assets/logo.png',
+                                        package: 'geideapay'),
                                     width: 30,
                                     fit: BoxFit.fill),
                                 Text(
@@ -884,21 +928,23 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                 ),
               ),
             ),
-            _checkoutInProgress ? Container(
-              color: Colors.black.withOpacity(0.5),
-              child: const Center(
-                child: CircularProgressIndicator(),
-              ),
-            ) : Container()
+            _checkoutInProgress
+                ? Container(
+                    color: Colors.black.withOpacity(0.5),
+                    child: const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  )
+                : Container()
           ],
-        )
-    );
+        ));
   }
 
   void onCreditCardModelChange(CreditCardModel? creditCardModel) {
     setState(() {
       widget.paymentCard.number = creditCardModel!.cardNumber;
-      List<int> expiryDate = CardUtils.getExpiryDate(creditCardModel.expiryDate);
+      List<int> expiryDate =
+          CardUtils.getExpiryDate(creditCardModel.expiryDate);
       widget.paymentCard.expiryMonth = expiryDate[0];
       widget.paymentCard.expiryYear = expiryDate[1];
       widget.paymentCard.name = creditCardModel.cardHolderName;
