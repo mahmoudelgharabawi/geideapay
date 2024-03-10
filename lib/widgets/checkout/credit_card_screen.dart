@@ -213,7 +213,7 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                                         borderRadius:
                                             BorderRadius.circular(8.0),
                                       ),
-                                      foregroundColor:
+                                      backgroundColor:
                                           widget.checkoutOptions.payButtonColor,
                                     ),
                                     child: Container(
@@ -259,7 +259,7 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                                         borderRadius:
                                             BorderRadius.circular(8.0),
                                       ),
-                                      foregroundColor: widget
+                                      backgroundColor: widget
                                           .checkoutOptions.cancelButtonColor,
                                     ),
                                     child: Container(
@@ -823,7 +823,7 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                                         borderRadius:
                                             BorderRadius.circular(8.0),
                                       ),
-                                      foregroundColor:
+                                      backgroundColor:
                                           widget.checkoutOptions.payButtonColor,
                                     ),
                                     child: Container(
@@ -877,7 +877,7 @@ class CreditCardScreenState extends State<CreditCardScreen> {
                                         borderRadius:
                                             BorderRadius.circular(8.0),
                                       ),
-                                      foregroundColor: widget
+                                      backgroundColor: widget
                                           .checkoutOptions.cancelButtonColor,
                                     ),
                                     child: Container(
